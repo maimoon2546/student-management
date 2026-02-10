@@ -1,0 +1,183 @@
+/* ======================
+   CARD BASE
+====================== */
+.student-card {
+  width: 650px;
+  height: 400px;
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 15px 35px rgba(0,0,0,.25);
+  font-family: 'Sarabun','Segoe UI',sans-serif;
+  position: relative;
+}
+
+/* ======================
+   LEFT (RED)
+====================== */
+.card-left {
+  flex: 1.4;
+  background: linear-gradient(135deg,#dc2626,#991b1b);
+  color: #fff;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Guilloche */
+.card-left::after {
+  content:'';
+  position:absolute;
+  inset:-40%;
+  background:
+    repeating-radial-gradient(
+      circle,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.08) 1px,
+      transparent 2px,
+      transparent 8px
+    );
+  opacity:.35;
+  pointer-events:none;
+}
+
+/* Diagonal stripe */
+.card-left::before {
+  content:'';
+  position:absolute;
+  top:-60%;
+  right:-30%;
+  width:160%;
+  height:200%;
+  background:linear-gradient(
+    135deg,
+    transparent 42%,
+    rgba(255,255,255,.15) 42%,
+    rgba(255,255,255,.15) 48%,
+    transparent 48%
+  );
+  transform:rotate(-12deg);
+  pointer-events:none;
+}
+
+/* Header */
+.school-header h2 {
+  margin:0;
+  font-size:24px;
+}
+.school-header p {
+  margin:4px 0 0;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+/* Info */
+.student-info {
+  margin-top:24px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:1;
+}
+
+.card-title {
+  font-weight:700;
+}
+
+.student-name {
+  font-size:18px;
+  font-weight:700;
+}
+
+.student-code span {
+  font-weight:700;
+}
+
+/* Photo */
+.student-photo {
+  width:140px;
+  height:180px;
+  object-fit:cover;
+  border:3px solid #fff;
+  border-radius:6px;
+}
+
+/* Footer */
+.card-footer {
+  margin-top:auto;
+  font-size:12px;
+  z-index:1;
+}
+
+/* Watermark logo */
+.logo-watermark {
+  position:absolute;
+  inset:0;
+  background:url('/logo1.png') center/320px no-repeat;
+  opacity:.06;
+  filter:grayscale(1);
+  pointer-events:none;
+}
+
+/* ======================
+   RIGHT (GRAY)
+====================== */
+.card-right {
+  flex:1;
+  background:#f3f4f6;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  position:relative;
+  border-left:6px solid #b91c1c;
+}
+
+/* vertical lines */
+.card-right::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,.04),
+      rgba(0,0,0,.04) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  opacity:.35;
+  pointer-events:none;
+}
+
+/* Logo */
+.school-logo {
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:72px;
+  height:72px;
+  background:#fff;
+  border-radius:50%;
+  border:3px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.school-logo img {
+  width:52px;
+}
+
+/* QR */
+.qr {
+  width:120px;
+  background:#fff;
+  padding:6px;
+  border-radius:6px;
+  border:2px solid #9ca3af;
+}
