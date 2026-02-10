@@ -1,0 +1,5 @@
+node_modules/
+BACK_END/node_modules/
+*.tar
+.env*
+.next
