@@ -1,6 +1,15 @@
-node_modules
-.next
-.vercel
+# dependencies
+node_modules/
+FRONT_END/node_modules/
+BACK_END/node_modules/
+
+# build
+.next/
+
+# env
 .env
 .env.local
+
+# vercel
+.vercel
 
