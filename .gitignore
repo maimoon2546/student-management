@@ -1,0 +1,9 @@
+node_modules/
+BACK_END/node_modules/
+FRONT_END/node_modules/
+
+.next/
+.env
+.env.local
+.vercel/
+
