@@ -1,7 +1,9 @@
-export function middleware(request) {
-  const response = NextResponse.next();
+import { NextResponse } from "next/server";
 
+export function middleware(request) {
   const origin = request.headers.get("origin");
+
+  const response = NextResponse.next();
 
   response.headers.set(
     "Access-Control-Allow-Origin",
@@ -10,7 +12,7 @@ export function middleware(request) {
 
   response.headers.set(
     "Access-Control-Allow-Methods",
-    "GET,POST,PUT,DELETE,OPTIONS"
+    "GET, POST, PUT, DELETE, OPTIONS"
   );
 
   response.headers.set(
@@ -20,3 +22,7 @@ export function middleware(request) {
 
   return response;
 }
+
+export const config = {
+  matcher: "/api/:path*",
+};
