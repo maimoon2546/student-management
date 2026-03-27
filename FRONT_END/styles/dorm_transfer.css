@@ -1,0 +1,666 @@
+/* ============================================================
+   dorm_transfer.css — Blue & Orange Theme | Full Responsive
+   Matches dashboard.css + dorm-log.css design system
+   ============================================================ */
+
+/* ========== TRANSFER CONTAINER ========== */
+.transfer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ========== CARD BASE ========== */
+.search-card,
+.student-info-box,
+.room-selection-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  transition: var(--transition);
+}
+
+/* ========== CARD HEADER ========== */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--gray-100);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue-900);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+}
+
+.title-icon { font-size: 22px; }
+
+.room-count {
+  font-size: 13px;
+  color: var(--gray-500);
+  font-weight: 600;
+  padding: 5px 13px;
+  background: var(--gray-100);
+  border-radius: 999px;
+  border: 1px solid var(--gray-200);
+  white-space: nowrap;
+}
+
+/* ========== SEARCH INPUT ========== */
+.search-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 19px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.search-input-transfer {
+  width: 100%;
+  padding: 14px 18px 14px 50px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  color: var(--gray-800);
+  background: var(--gray-50);
+  transition: var(--transition);
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.search-input-transfer:focus {
+  outline: none;
+  border-color: var(--blue-500);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+.search-input-transfer::placeholder {
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
+.search-input-transfer:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.input-loader {
+  position: absolute;
+  right: 15px;
+}
+
+.spinner-small {
+  width: 19px;
+  height: 19px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--blue-500);
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ========== ALERT BOX ========== */
+.alert-box {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  animation: alertFadeIn 0.28s ease-out;
+  font-family: inherit;
+}
+
+@keyframes alertFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.alert-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.alert-box.success {
+  background: var(--green-100);
+  color: var(--green-900);
+  border: 1.5px solid #86efac;
+}
+
+.alert-box.success .alert-icon {
+  background: var(--green-500);
+  color: white;
+}
+
+.alert-box.error {
+  background: var(--red-100);
+  color: var(--red-900);
+  border: 1.5px solid #fca5a5;
+}
+
+.alert-box.error .alert-icon {
+  background: var(--red-500);
+  color: white;
+}
+
+/* ========== STUDENT INFO BOX ========== */
+.info-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--gray-100);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.info-box-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue-900);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+}
+
+/* Status Badge — reuse dorm-log pattern */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.50; transform: scale(1.2); }
+}
+
+.status-badge.in {
+  background: linear-gradient(135deg, var(--green-100), #bbf7d0);
+  color: var(--green-900);
+  border: 1.5px solid #86efac;
+}
+
+.status-badge.in .badge-dot {
+  background: var(--green-500);
+  box-shadow: 0 0 6px rgba(34,197,94,0.55);
+}
+
+.status-badge.out {
+  background: linear-gradient(135deg, var(--orange-100), var(--orange-200));
+  color: var(--orange-700);
+  border: 1.5px solid var(--orange-300);
+}
+
+.status-badge.out .badge-dot {
+  background: var(--orange-500);
+  box-shadow: 0 0 6px rgba(249,115,22,0.55);
+}
+
+/* ========== INFO GRID ========== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.field-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-800);
+  padding: 11px 14px;
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-200);
+  line-height: 1.4;
+}
+
+.field-value.highlight {
+  background: var(--blue-50);
+  border-color: var(--blue-200);
+  color: var(--blue-800);
+}
+
+/* Code Badge */
+.code-badge {
+  display: inline-block;
+  background: var(--blue-50);
+  color: var(--blue-800);
+  padding: 4px 11px;
+  border-radius: var(--radius-sm);
+  font-family: 'Courier New', monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+  border: 1.5px solid var(--blue-200);
+}
+
+/* ========== ROOM SELECTION CARD ========== */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 4px;
+}
+
+/* ========== ROOM CARD ========== */
+.room-card {
+  position: relative;
+  padding: 18px;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.room-card:hover:not(.disabled) {
+  border-color: var(--blue-400);
+  background: var(--blue-50);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+}
+
+.room-card.selected {
+  border-color: var(--orange-500);
+  background: linear-gradient(135deg, var(--orange-50), #fff7ed);
+  box-shadow: 0 6px 18px rgba(249,115,22,0.15);
+}
+
+.room-card.selected:hover {
+  border-color: var(--orange-600);
+  transform: translateY(-3px);
+}
+
+.room-card.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+}
+
+.room-card.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Room Number */
+.room-number {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 11px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.room-card.selected .room-number {
+  color: var(--orange-700);
+}
+
+.room-icon { font-size: 18px; }
+
+/* Room Info Row */
+.room-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.room-capacity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+}
+
+.capacity-icon { font-size: 14px; }
+
+/* Room Status */
+.room-status {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.room-status.available {
+  background: var(--green-100);
+  color: var(--green-900);
+  border: 1px solid #86efac;
+}
+
+.room-status.full {
+  background: var(--red-100);
+  color: var(--red-900);
+  border: 1px solid #fca5a5;
+}
+
+/* Selected Badge */
+.selected-badge {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(249,115,22,0.40);
+  animation: popIn 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ========== EMPTY ROOMS ========== */
+.empty-rooms {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 52px 20px;
+}
+
+.empty-rooms .empty-icon {
+  font-size: 56px;
+  margin-bottom: 13px;
+  opacity: 0.42;
+  display: block;
+}
+
+.empty-rooms p {
+  font-size: 15px;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+/* ========== TRANSFER ACTIONS ========== */
+.transfer-actions {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.transfer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px 46px;
+  background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-blue);
+  min-width: 260px;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+}
+
+.transfer-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(37,99,235,0.38);
+}
+
+.transfer-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.transfer-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-loader {
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* === Large Desktop (1400px+) === */
+@media (min-width: 1400px) {
+  .transfer-container {
+    max-width: 1200px;
+  }
+
+  .rooms-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* === Laptop (1024px – 1399px) === */
+@media (max-width: 1399px) and (min-width: 1024px) {
+  .rooms-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* === Tablet (768px – 1023px) === */
+@media (max-width: 1023px) {
+  .transfer-container {
+    gap: 16px;
+  }
+
+  .search-card,
+  .student-info-box,
+  .room-selection-card {
+    padding: 20px;
+  }
+
+  .rooms-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+  }
+
+  .card-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .transfer-btn {
+    min-width: 220px;
+    padding: 14px 36px;
+  }
+}
+
+/* === Mobile (480px – 767px) === */
+@media (max-width: 767px) {
+  .transfer-container {
+    gap: 14px;
+  }
+
+  .search-card,
+  .student-info-box,
+  .room-selection-card {
+    padding: 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .card-title,
+  .info-box-title {
+    font-size: 16px;
+  }
+
+  .title-icon { font-size: 19px; }
+
+  .info-box-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .field-value { font-size: 14px; padding: 10px 12px; }
+
+  .rooms-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 11px;
+  }
+
+  .room-card { padding: 14px; }
+  .room-number { font-size: 15px; margin-bottom: 9px; }
+  .room-icon { font-size: 16px; }
+
+  .transfer-btn {
+    width: 100%;
+    min-width: unset;
+    padding: 14px 20px;
+    font-size: 14.5px;
+  }
+
+  .search-input-transfer {
+    font-size: 14px;
+    padding: 12px 16px 12px 46px;
+  }
+
+  .alert-box {
+    font-size: 13px;
+    padding: 11px 14px;
+  }
+}
+
+/* === Small Mobile (< 480px) === */
+@media (max-width: 479px) {
+  .search-card,
+  .student-info-box,
+  .room-selection-card {
+    padding: 14px;
+  }
+
+  .card-title,
+  .info-box-title {
+    font-size: 15px;
+  }
+
+  .rooms-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .room-card { padding: 13px; }
+
+  .room-number { font-size: 14.5px; }
+
+  .room-info { flex-wrap: wrap; gap: 7px; }
+
+  .room-status { font-size: 11px; }
+
+  .transfer-btn {
+    font-size: 14px;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+  }
+
+  .search-input-transfer {
+    font-size: 13.5px;
+    padding: 11px 14px 11px 44px;
+  }
+
+  .info-grid { gap: 9px; }
+
+  .field-label { font-size: 11px; }
+  .field-value { font-size: 13.5px; padding: 9px 11px; }
+
+  .selected-badge { width: 22px; height: 22px; font-size: 12px; top: 9px; right: 9px; }
+
+  .card-header { gap: 8px; padding-bottom: 12px; margin-bottom: 16px; }
+}

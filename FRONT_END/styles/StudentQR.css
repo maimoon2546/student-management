@@ -1,0 +1,578 @@
+/* ============================================================
+   StudentQR.css — Blue & Orange Theme | Full Responsive
+   Matches dashboard.css + scan.css + student-page.css
+   ── ตัวบัตรด้านในไม่เปลี่ยน ปรับเฉพาะ wrapper รอบนอก ──
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ── Variables (shared design system) ── */
+:root {
+  --blue-50:    #eff6ff;
+  --blue-100:   #dbeafe;
+  --blue-200:   #bfdbfe;
+  --blue-500:   #3b82f6;
+  --blue-600:   #2563eb;
+  --blue-700:   #1d4ed8;
+  --blue-800:   #1e40af;
+  --blue-900:   #1e3a8a;
+
+  --orange-50:  #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-200: #fed7aa;
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+
+  --gray-50:    #f8fafc;
+  --gray-100:   #f1f5f9;
+  --gray-200:   #e2e8f0;
+  --gray-300:   #cbd5e1;
+  --gray-400:   #94a3b8;
+  --gray-500:   #64748b;
+  --gray-600:   #475569;
+  --gray-700:   #334155;
+  --gray-800:   #1e293b;
+
+  --surface:    #ffffff;
+  --border:     #e2e8f0;
+
+  --shadow-md:     0 4px 14px rgba(0,0,0,0.08);
+  --shadow-lg:     0 16px 48px rgba(30,58,138,0.13), 0 6px 18px rgba(0,0,0,0.06);
+  --shadow-blue:   0 6px 20px rgba(37,99,235,0.28);
+  --shadow-orange: 0 6px 20px rgba(249,115,22,0.28);
+
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  22px;
+
+  --font: 'Noto Sans Thai', 'IBM Plex Sans Thai', 'Segoe UI', sans-serif;
+  --transition: all 0.24s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   QR WRAPPER — centers the card, adds subtle backdrop
+   ============================================================ */
+.qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  font-family: var(--font);
+}
+
+/* ============================================================
+   CARD CONTAINER — scroll zone on small screens
+   ============================================================ */
+.card-scroll-zone {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+/* Thin orange scrollbar */
+.card-scroll-zone::-webkit-scrollbar {
+  height: 4px;
+}
+
+.card-scroll-zone::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: 99px;
+}
+
+.card-scroll-zone::-webkit-scrollbar-thumb {
+  background: var(--orange-300);
+  border-radius: 99px;
+}
+
+/* ============================================================
+   CARD HINT — "เลื่อนดูบัตรได้" on mobile
+   ============================================================ */
+.card-hint {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-400);
+  padding: 5px 12px;
+  background: var(--gray-100);
+  border-radius: 999px;
+  border: 1px solid var(--gray-200);
+  animation: fadeIn 0.4s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   ACTION STRIP — print / download below card
+   ============================================================ */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.card-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.card-action-btn:hover  { transform: translateY(-2px); }
+.card-action-btn:active { transform: translateY(0); }
+
+/* Blue variant */
+.card-action-btn.blue {
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  color: white;
+  box-shadow: var(--shadow-blue);
+}
+
+.card-action-btn.blue:hover {
+  box-shadow: 0 8px 22px rgba(37,99,235,0.40);
+}
+
+/* Orange variant */
+.card-action-btn.orange {
+  background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+  color: white;
+  box-shadow: var(--shadow-orange);
+}
+
+.card-action-btn.orange:hover {
+  box-shadow: 0 8px 22px rgba(249,115,22,0.40);
+}
+
+/* ============================================================
+   STATUS STATES
+   ============================================================ */
+
+/* Loading */
+.center {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.center::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--blue-100);
+  border-top-color: var(--blue-500);
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error */
+.error {
+  text-align: center;
+  padding: 28px 20px;
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  border-radius: var(--radius-md);
+}
+
+/* ============================================================
+   ตัวบัตร (studentCard) — ไม่เปลี่ยน styles ด้านใน
+   เพิ่มเฉพาะ animation entrance
+   ============================================================ */
+.studentCard {
+  animation: cardEnter 0.46s cubic-bezier(0.22,0.68,0,1.15) both;
+  flex-shrink: 0; /* ป้องกันบัตรยุบใน flex container */
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* === Large Desktop (1200px+) === */
+@media (min-width: 1200px) {
+  .qr-wrapper { gap: 22px; }
+  .card-action-btn { padding: 11px 26px; font-size: 14px; }
+}
+
+/* === Tablet (768px – 1023px) === */
+@media (max-width: 1023px) {
+  .qr-wrapper { gap: 16px; }
+}
+
+/* === Mobile (< 640px) — show scroll hint === */
+@media (max-width: 639px) {
+  .card-hint { display: inline-flex; }
+
+  .card-scroll-zone {
+    justify-content: flex-start;
+    padding: 0 4px 6px;
+  }
+
+  .card-actions { gap: 8px; }
+
+  .card-action-btn {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+}
+
+/* === Small Mobile (< 480px) === */
+@media (max-width: 479px) {
+  .card-action-btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 120px;
+    padding: 9px 14px;
+    font-size: 12.5px;
+  }
+
+  .center { font-size: 13px; padding: 32px 16px; }
+  .error  { font-size: 13px; padding: 22px 16px; }
+}
+
+/* === Very Small (< 360px) === */
+@media (max-width: 359px) {
+  .card-action-btn { font-size: 12px; padding: 8px 12px; }
+}
+
+/* ============================================================
+   Print
+   ============================================================ */
+@media print {
+  .card-hint,
+  .card-actions { display: none; }
+
+  .card-scroll-zone { overflow: visible; }
+
+  .studentCard { animation: none; box-shadow: none !important; }
+}
+
+/* ============================================================
+   STUDENT CARD — styles เดิมของบัตร (ไม่เปลี่ยน)
+   ============================================================ */
+
+/* โครงหลักของบัตร */
+.studentCard {
+  display: flex;
+  width: 530px;
+  height: 330px;
+  border: 3px solid #1e4f8a;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  font-family: "Prompt", sans-serif;
+  background: linear-gradient(135deg,
+      #1e88e5 0%,
+      #1565c0 45%,
+      #0d47a1 70%,
+      #092d64 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* เส้นโค้งกราฟิกหลัก */
+.studentCard::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  top: -220px;
+  right: -120px;
+}
+
+/* เส้นโค้งอีกชั้น */
+.studentCard::after {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(255, 140, 0, 0.18);
+  bottom: -220px;
+  left: -120px;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  opacity: 0.10;
+  filter: grayscale(100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ฝั่งซ้าย */
+.cardLeft {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  color: white;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 6px;
+}
+
+.schoolLogo img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.schoolNameTH {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.schoolNameEN {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 2px;
+  color: #ffbc7a;
+}
+
+/* เนื้อหาบัตร */
+.cardBody {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.studentDetails {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.detailRow {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+
+.label {
+  margin-right: 6px;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+.value {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* รูปนักเรียน */
+.studentPhotoBox {
+  width: 110px;
+  height: 135px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  background: rgb(255, 255, 255);
+  flex-shrink: 0;
+}
+
+.studentPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* QR BOX */
+.qrBox {
+  margin-top: 8px;
+  display: inline-flex;
+  padding: 7px;
+  border-radius: 11px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* QR IMAGE */
+.qrImage {
+  width: 72px;
+  height: 72px;
+  display: block;
+  border-radius: 7px;
+}
+
+/* วันที่ออกบัตร */
+.issueDateBox {
+  font-size: 13px;
+  margin-top: 10px;
+  color: #fff;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+/* Photo section */
+.photoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 18px;
+}
+.detailRow {
+  display: flex;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   STUDENT CARD RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .studentCard {
+    width: 460px;
+    height: 285px;
+  }
+
+  .cardLeft { padding: 12px 14px; }
+
+  .schoolLogo img { width: 44px; height: 44px; }
+
+  .schoolNameTH { font-size: 14px; }
+  .schoolNameEN { font-size: 10px; }
+  .cardTitle    { font-size: 11px; }
+  .detailRow    { font-size: 11px; }
+
+  .studentPhotoBox { width: 78px; height: 96px; }
+  .qrImage         { width: 52px; height: 52px; }
+  .issueDateBox    { font-size: 9px; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .studentCard {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 530 / 330;
+  }
+
+  .cardLeft { padding: 10px 12px; }
+
+  .schoolLogo img { width: 38px; height: 38px; }
+
+  .schoolNameTH { font-size: 12px; }
+  .schoolNameEN { font-size: 9px; }
+  .cardTitle    { font-size: 10px; }
+  .detailRow    { font-size: 10px; margin-top: 3px; }
+
+  .studentPhotoBox { width: 68px; height: 84px; border-radius: 8px; }
+  .qrImage         { width: 46px; height: 46px; }
+  .qrBox           { padding: 4px; border-radius: 7px; margin-top: 5px; }
+  .issueDateBox    { font-size: 8px; margin-top: 5px; }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .studentCard { max-width: 100%; }
+
+  .cardHeader { gap: 6px; }
+
+  .schoolLogo img { width: 32px; height: 32px; }
+
+  .schoolNameTH { font-size: 11px; }
+  .schoolNameEN { font-size: 8px; }
+  .cardTitle    { font-size: 9px; }
+  .detailRow    { font-size: 9px; }
+
+  .studentPhotoBox { width: 58px; height: 72px; }
+  .qrImage         { width: 38px; height: 38px; }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .studentCard {
+    border-width: 2px;
+    border-radius: 10px;
+  }
+
+  .cardLeft { padding: 8px 10px; }
+
+  .cardHeader { gap: 5px; padding-bottom: 4px; }
+
+  .schoolLogo img { width: 28px; height: 28px; }
+
+  .schoolNameTH { font-size: 10px; }
+  .schoolNameEN { font-size: 7.5px; }
+  .cardTitle    { font-size: 8.5px; }
+  .detailRow    { font-size: 8.5px; margin-top: 3px; }
+
+  .studentPhotoBox { width: 50px; height: 62px; border-radius: 7px; }
+  .qrImage         { width: 32px; height: 32px; }
+  .qrBox           { padding: 3px; border-radius: 6px; }
+  .issueDateBox    { font-size: 7.5px; margin-top: 4px; }
+}

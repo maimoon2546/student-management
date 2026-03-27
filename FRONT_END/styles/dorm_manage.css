@@ -1,0 +1,794 @@
+/* ============================================================
+   dorm_manage.css — Blue & Orange Theme | Standalone
+   ครอบคลุมทุก class ใน dorm-manage/page.js
+   Scoped ด้วย .content-wrapper — ไม่พึ่ง CSS ไฟล์ไหนเลย
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   CSS VARIABLES — prefix --dm- (dorm-manage)
+   ============================================================ */
+:root {
+  --dm-blue-50: #eff6ff;
+  --dm-blue-100: #dbeafe;
+  --dm-blue-200: #bfdbfe;
+  --dm-blue-300: #93c5fd;
+  --dm-blue-400: #60a5fa;
+  --dm-blue-500: #3b82f6;
+  --dm-blue-600: #2563eb;
+  --dm-blue-700: #1d4ed8;
+  --dm-blue-800: #1e40af;
+  --dm-blue-900: #1e3a8a;
+
+  --dm-orange-50: #fff7ed;
+  --dm-orange-100: #ffedd5;
+  --dm-orange-200: #fed7aa;
+  --dm-orange-300: #fdba74;
+  --dm-orange-400: #fb923c;
+  --dm-orange-500: #f97316;
+  --dm-orange-600: #ea580c;
+  --dm-orange-700: #c2410c;
+
+  --dm-green-100: #dcfce7;
+  --dm-green-400: #4ade80;
+  --dm-green-500: #22c55e;
+  --dm-green-600: #16a34a;
+  --dm-green-900: #065f46;
+
+  --dm-red-100: #fee2e2;
+  --dm-red-400: #f87171;
+  --dm-red-500: #ef4444;
+  --dm-red-900: #991b1b;
+
+  --dm-yellow-100: #fef3c7;
+  --dm-yellow-300: #fde68a;
+  --dm-yellow-400: #facc15;
+  --dm-yellow-900: #92400e;
+
+  --dm-gray-50: #f8fafc;
+  --dm-gray-100: #f1f5f9;
+  --dm-gray-200: #e2e8f0;
+  --dm-gray-300: #cbd5e1;
+  --dm-gray-400: #94a3b8;
+  --dm-gray-500: #64748b;
+  --dm-gray-600: #475569;
+  --dm-gray-700: #334155;
+  --dm-gray-800: #1e293b;
+  --dm-gray-900: #0f172a;
+
+  --dm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --dm-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --dm-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.10), 0 4px 10px rgba(0, 0, 0, 0.05);
+  --dm-shadow-blue: 0 6px 20px rgba(37, 99, 235, 0.25);
+  --dm-shadow-orange: 0 6px 20px rgba(249, 115, 22, 0.25);
+  --dm-shadow-green: 0 4px 14px rgba(34, 197, 94, 0.18);
+
+  --dm-radius-sm: 8px;
+  --dm-radius-md: 12px;
+  --dm-radius-lg: 16px;
+  --dm-radius-xl: 20px;
+
+  --dm-font: 'Noto Sans Thai', 'IBM Plex Sans Thai', 'Segoe UI', sans-serif;
+  --dm-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --dm-transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   CONTENT WRAPPER — page root + scope
+   ============================================================ */
+.content-wrapper {
+  width: 100%;
+  font-family: var(--dm-font);
+  -webkit-font-smoothing: antialiased;
+  color: var(--dm-gray-800);
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.content-wrapper .page-header-register {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--dm-blue-600) 0%, var(--dm-blue-700) 100%);
+  border-radius: var(--dm-radius-lg);
+  box-shadow: var(--dm-shadow-blue);
+  position: relative;
+  overflow: hidden;
+  animation: dm-fadeUp 0.38s ease both;
+}
+
+/* Dot pattern */
+.content-wrapper .page-header-register::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Orange blob */
+.content-wrapper .page-header-register::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 155px;
+  height: 155px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.content-wrapper .header-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  border-radius: var(--dm-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  position: relative;
+  z-index: 1;
+  transition: var(--dm-transition);
+}
+
+.content-wrapper .header-icon-wrapper:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.content-wrapper .header-icon {
+  font-size: 26px;
+}
+
+.content-wrapper .page-title-register {
+  font-size: 21px;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 3px;
+  letter-spacing: -0.02em;
+  font-family: var(--dm-font);
+  position: relative;
+  z-index: 1;
+}
+
+.content-wrapper .page-subtitle-register {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  font-family: var(--dm-font);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   ALERT MESSAGE
+   ============================================================ */
+.content-wrapper .alert-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  border-radius: var(--dm-radius-sm);
+  margin-bottom: 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: var(--dm-font);
+  animation: dm-slideDown 0.28s ease both;
+}
+
+.content-wrapper .alert-message.success {
+  background: linear-gradient(135deg, var(--dm-green-100), #bbf7d0);
+  color: var(--dm-green-900);
+  border: 1.5px solid var(--dm-green-400);
+  box-shadow: var(--dm-shadow-green);
+}
+
+.content-wrapper .alert-message.error {
+  background: linear-gradient(135deg, var(--dm-red-100), #fecaca);
+  color: var(--dm-red-900);
+  border: 1.5px solid #fca5a5;
+}
+
+.content-wrapper .alert-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.content-wrapper .alert-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   REGISTER CONTAINER — 2 col (forms | lists)
+   ============================================================ */
+.content-wrapper .register-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 22px;
+  align-items: start;
+  animation: dm-fadeUp 0.42s ease 0.06s both;
+}
+
+/* ============================================================
+   REGISTER FORM card
+   ============================================================ */
+.content-wrapper .register-form {
+  background: white;
+  border-radius: var(--dm-radius-lg);
+  padding: 24px;
+  box-shadow: var(--dm-shadow-sm);
+  border: 1px solid var(--dm-gray-200);
+}
+
+/* ============================================================
+   FORM SECTION
+   ============================================================ */
+.content-wrapper .form-section {
+  margin-bottom: 0;
+}
+
+.content-wrapper .section-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dm-blue-900);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--dm-font);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--dm-blue-100);
+  position: relative;
+}
+
+/* Gradient accent underline */
+.content-wrapper .section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--dm-blue-500), var(--dm-orange-500));
+  border-radius: 999px;
+}
+
+.content-wrapper .section-icon {
+  font-size: 17px;
+}
+
+/* ============================================================
+   FORM FIELDS
+   ============================================================ */
+.content-wrapper .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.content-wrapper .form-group {
+  margin-bottom: 16px;
+}
+
+.content-wrapper .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.content-wrapper .form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dm-gray-700);
+  margin-bottom: 7px;
+  font-family: var(--dm-font);
+  letter-spacing: 0.01em;
+}
+
+.content-wrapper .required {
+  color: var(--dm-red-500);
+  margin-left: 3px;
+}
+
+/* Wrappers */
+.content-wrapper .input-wrapper,
+.content-wrapper .textarea-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.content-wrapper .textarea-wrapper {
+  align-items: flex-start;
+}
+
+/* Icons */
+.content-wrapper .input-icon {
+  position: absolute;
+  left: 13px;
+  font-size: 16px;
+  z-index: 1;
+  pointer-events: none;
+  color: var(--dm-gray-400);
+  transition: var(--dm-transition);
+}
+
+.content-wrapper .textarea-icon {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  font-size: 16px;
+  z-index: 1;
+  pointer-events: none;
+  color: var(--dm-gray-400);
+}
+
+/* Icon color on focus */
+.content-wrapper .input-wrapper:focus-within .input-icon,
+.content-wrapper .textarea-wrapper:focus-within .textarea-icon {
+  color: var(--dm-blue-500);
+}
+
+/* Input / Select / Textarea */
+.content-wrapper .form-input,
+.content-wrapper .form-textarea {
+  width: 100%;
+  padding: 11px 14px 11px 42px;
+  border: 2px solid var(--dm-gray-200);
+  border-radius: var(--dm-radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--dm-gray-800);
+  background: var(--dm-gray-50);
+  transition: var(--dm-transition);
+  font-family: var(--dm-font);
+}
+
+/* Select used with input-wrapper (ใช้ form-input class) */
+.content-wrapper .form-input[class~="form-input"]:is(select) {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-color: var(--dm-gray-50);
+  padding-right: 38px;
+}
+
+/* Select element โดยตรง */
+.content-wrapper .input-wrapper select.form-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-color: var(--dm-gray-50);
+  padding-right: 38px;
+}
+
+.content-wrapper .form-input:hover {
+  border-color: var(--dm-blue-300);
+}
+
+.content-wrapper .form-input:focus,
+.content-wrapper .form-textarea:focus {
+  outline: none;
+  border-color: var(--dm-blue-500);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.content-wrapper .form-input::placeholder,
+.content-wrapper .form-textarea::placeholder {
+  color: var(--dm-gray-400);
+}
+
+/* Textarea */
+.content-wrapper .form-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.65;
+  align-self: stretch;
+}
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+.content-wrapper .form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.content-wrapper .submit-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--dm-radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--dm-font);
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--dm-blue-500), var(--dm-blue-700));
+  color: white;
+  box-shadow: var(--dm-shadow-blue);
+  transition: var(--dm-transition);
+}
+
+.content-wrapper .submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.38);
+}
+
+.content-wrapper .submit-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.content-wrapper .spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.30);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: dm-spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   RIGHT COLUMN — filter-wrapper, info-card-side
+   ============================================================ */
+
+/* Filter wrapper — ประเภทหอ + เลือกหอ */
+.content-wrapper .filter-wrapper {
+  background: white;
+  border-radius: var(--dm-radius-lg);
+  padding: 20px;
+  box-shadow: var(--dm-shadow-sm);
+  border: 1px solid var(--dm-gray-200);
+  animation: dm-fadeUp 0.44s ease 0.08s both;
+}
+
+/* Shared info-header used in both filter-wrapper & info-card-side */
+.content-wrapper .info-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 16px;
+  padding-bottom: 13px;
+  border-bottom: 2px solid var(--dm-gray-100);
+}
+
+.content-wrapper .info-header h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dm-blue-900);
+  font-family: var(--dm-font);
+  margin: 0;
+}
+
+.content-wrapper .info-icon {
+  font-size: 19px;
+}
+
+/* Filter group */
+.content-wrapper .filter-group {
+  margin-bottom: 14px;
+}
+
+.content-wrapper .filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.content-wrapper .filter-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--dm-gray-600);
+  margin-bottom: 7px;
+  letter-spacing: 0.02em;
+  font-family: var(--dm-font);
+  text-transform: uppercase;
+}
+
+.content-wrapper .filter-select {
+  width: 100%;
+  padding: 10px 36px 10px 14px;
+  border: 2px solid var(--dm-gray-200);
+  border-radius: var(--dm-radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dm-gray-800);
+  background: var(--dm-gray-50);
+  font-family: var(--dm-font);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  background-color: var(--dm-gray-50);
+  transition: var(--dm-transition);
+}
+
+.content-wrapper .filter-select:hover {
+  border-color: var(--dm-blue-300);
+}
+
+.content-wrapper .filter-select:focus {
+  outline: none;
+  border-color: var(--dm-blue-500);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* Info Card Side — room list */
+.content-wrapper .info-card-side {
+  background: white;
+  border-radius: var(--dm-radius-lg);
+  padding: 20px;
+  box-shadow: var(--dm-shadow-sm);
+  border: 1px solid var(--dm-gray-200);
+  animation: dm-expandIn 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Info item (row in room list) */
+.content-wrapper .info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  background: var(--dm-gray-50);
+  border-radius: var(--dm-radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--dm-gray-700);
+  border: 1px solid transparent;
+  transition: var(--dm-transition);
+  font-family: var(--dm-font);
+}
+
+.content-wrapper .info-item:hover {
+  background: var(--dm-blue-50);
+  border-color: var(--dm-blue-200);
+  transform: translateX(3px);
+}
+
+/* Room occupancy badges (inline style ใน JSX แต่ CSS fallback ไว้) */
+.content-wrapper .room-badge-full {
+  background: var(--dm-red-100);
+  color: var(--dm-red-900);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.content-wrapper .room-badge-available {
+  background: var(--dm-green-100);
+  color: var(--dm-green-900);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+/* Empty state */
+.content-wrapper .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.content-wrapper .empty-state-icon {
+  font-size: 48px;
+  opacity: 0.38;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ≥1400px */
+@media (min-width: 1400px) {
+  .content-wrapper .register-container {
+    grid-template-columns: 1fr 360px;
+    gap: 26px;
+  }
+
+  .content-wrapper .page-header-register {
+    padding: 22px 28px;
+  }
+
+  .content-wrapper .page-title-register {
+    font-size: 23px;
+  }
+
+  .content-wrapper .register-form {
+    padding: 28px;
+  }
+
+  .content-wrapper .filter-wrapper,
+  .content-wrapper .info-card-side {
+    padding: 22px;
+  }
+}
+
+/* ≤1199px */
+@media (max-width: 1199px) {
+  .content-wrapper .register-container {
+    grid-template-columns: 1fr 290px;
+  }
+}
+
+/* ≤1023px */
+@media (max-width: 1023px) {
+  .content-wrapper .page-header-register {
+    padding: 17px 18px;
+  }
+
+  .content-wrapper .register-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Right col ขึ้นก่อน form บน tablet */
+  .content-wrapper .register-container>div:last-child {
+    order: -1;
+  }
+
+  .content-wrapper .form-row {
+    gap: 14px;
+  }
+}
+
+/* ≤767px */
+@media (max-width: 767px) {
+  .content-wrapper .page-header-register {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 17px 15px;
+  }
+
+  .content-wrapper .header-icon-wrapper {
+    margin: 0 auto;
+    width: 52px;
+    height: 52px;
+  }
+
+  .content-wrapper .header-icon {
+    font-size: 24px;
+  }
+
+  .content-wrapper .page-title-register {
+    font-size: 18px;
+  }
+
+  .content-wrapper .page-subtitle-register {
+    font-size: 12.5px;
+  }
+
+  .content-wrapper .register-form {
+    padding: 18px;
+  }
+
+  .content-wrapper .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .content-wrapper .form-actions {
+    flex-direction: column;
+  }
+
+  .content-wrapper .submit-button {
+    width: 100%;
+  }
+
+  .content-wrapper .filter-wrapper,
+  .content-wrapper .info-card-side {
+    padding: 16px;
+  }
+}
+
+/* ≤479px */
+@media (max-width: 479px) {
+  .content-wrapper .page-header-register {
+    padding: 14px;
+  }
+
+  .content-wrapper .page-title-register {
+    font-size: 16px;
+  }
+
+  .content-wrapper .register-form {
+    padding: 14px;
+  }
+
+  .content-wrapper .section-title {
+    font-size: 14px;
+  }
+
+  .content-wrapper .form-input,
+  .content-wrapper .form-textarea {
+    font-size: 13px;
+    padding: 10px 12px 10px 40px;
+  }
+
+  .content-wrapper .input-icon {
+    font-size: 15px;
+    left: 11px;
+  }
+
+  .content-wrapper .textarea-icon {
+    font-size: 15px;
+    left: 11px;
+    top: 11px;
+  }
+
+  .content-wrapper .submit-button {
+    padding: 11px 16px;
+    font-size: 13.5px;
+  }
+
+  .content-wrapper .filter-wrapper,
+  .content-wrapper .info-card-side {
+    padding: 13px;
+  }
+
+  .content-wrapper .filter-select {
+    font-size: 13px;
+  }
+
+  .content-wrapper .info-item {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
+
+/* ≤359px */
+@media (max-width: 359px) {
+  .content-wrapper .page-title-register {
+    font-size: 14.5px;
+  }
+
+  .content-wrapper .register-form {
+    padding: 12px;
+  }
+
+  .content-wrapper .form-input,
+  .content-wrapper .form-textarea {
+    padding: 9px 11px 9px 38px;
+    font-size: 12.5px;
+  }
+
+  .content-wrapper .input-icon,
+  .content-wrapper .textarea-icon {
+    font-size: 14px;
+    left: 10px;
+  }
+
+  .content-wrapper .submit-button {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .content-wrapper .filter-select {
+    font-size: 12.5px;
+    padding: 9px 32px 9px 12px;
+  }
+}

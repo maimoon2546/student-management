@@ -1,0 +1,1128 @@
+/* ============================================================
+   dorm-log.css — Blue & Orange | Scoped under .dorm-log-page
+   ทุก rule ใช้ .dorm-log-page นำหน้า — standalone, ไม่ conflict
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes dl-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dl-slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dl-fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dl-badgePulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(1.2);
+  }
+}
+
+/* ============================================================
+   PAGE CONTAINER
+   ============================================================ */
+.dorm-log-page {
+  min-height: 100vh;
+  background: var(--gray-100, #f1f5f9);
+  font-family: 'Noto Sans Thai', 'IBM Plex Sans Thai', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #1e293b;
+}
+
+/* ============================================================
+   LOADING STATE
+   ============================================================ */
+.dorm-log-page .dl-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 18px;
+}
+
+.dorm-log-page .dl-spinner {
+  width: 46px;
+  height: 46px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: dl-spin 0.72s linear infinite;
+}
+
+.dorm-log-page .dl-loading-state p {
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.dorm-log-page .dl-page-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.28);
+  position: relative;
+  overflow: hidden;
+  animation: dl-fadeUp 0.40s ease both;
+}
+
+/* Dot pattern */
+.dorm-log-page .dl-page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Orange blob */
+.dorm-log-page .dl-page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.dorm-log-page .dl-header-icon-box {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  position: relative;
+  z-index: 1;
+  font-size: 28px;
+}
+
+.dorm-log-page .dl-header-text {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.dorm-log-page .dl-header-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.dorm-log-page .dl-header-subtitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.84);
+  margin: 0;
+}
+
+.dorm-log-page .dl-header-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+.dorm-log-page .dl-header-actions-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Buttons */
+.dorm-log-page .dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.dorm-log-page .dl-btn-primary {
+  background: white;
+  color: #1d4ed8;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.22);
+}
+
+.dorm-log-page .dl-btn-primary:hover {
+  transform: translateY(-2px);
+  background: #fff7ed;
+  color: #c2410c;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.30);
+}
+
+.dorm-log-page .dl-btn-icon {
+  font-size: 15px;
+}
+
+/* ============================================================
+   STATS GRID — scoped, no conflict
+   ============================================================ */
+.dorm-log-page .dl-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+  animation: dl-fadeUp 0.44s ease 0.06s both;
+}
+
+.dorm-log-page .dl-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bottom accent bar */
+.dorm-log-page .dl-stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 0 0 16px 16px;
+}
+
+.dorm-log-page .dl-stat-card.total::after {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.dorm-log-page .dl-stat-card.out::after {
+  background: linear-gradient(90deg, #f97316, #fb923c);
+}
+
+.dorm-log-page .dl-stat-card.in::after {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+/* Decorative circle */
+.dorm-log-page .dl-stat-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  opacity: 0.05;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dorm-log-page .dl-stat-card.total::before {
+  background: #3b82f6;
+}
+
+.dorm-log-page .dl-stat-card.out::before {
+  background: #f97316;
+}
+
+.dorm-log-page .dl-stat-card.in::before {
+  background: #22c55e;
+}
+
+.dorm-log-page .dl-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+  border-color: transparent;
+}
+
+.dorm-log-page .dl-stat-card:hover::before {
+  opacity: 0.10;
+  transform: scale(1.4);
+}
+
+.dorm-log-page .dl-stat-card.total:hover {
+  box-shadow: 0 10px 28px rgba(59, 130, 246, 0.18);
+}
+
+.dorm-log-page .dl-stat-card.out:hover {
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.18);
+}
+
+.dorm-log-page .dl-stat-card.in:hover {
+  box-shadow: 0 10px 28px rgba(34, 197, 94, 0.18);
+}
+
+/* Icon */
+.dorm-log-page .dl-stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dorm-log-page .dl-stat-card.total .dl-stat-icon {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.dorm-log-page .dl-stat-card.out .dl-stat-icon {
+  background: linear-gradient(135deg, #ffedd5, #fed7aa);
+}
+
+.dorm-log-page .dl-stat-card.in .dl-stat-icon {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+}
+
+.dorm-log-page .dl-stat-card:hover .dl-stat-icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+/* Text */
+.dorm-log-page .dl-stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dorm-log-page .dl-stat-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.03em;
+}
+
+.dorm-log-page .dl-stat-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   FILTER SECTION
+   ============================================================ */
+.dorm-log-page .dl-filter-section {
+  background: white;
+  border-radius: 16px;
+  padding: 15px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: dl-fadeUp 0.44s ease 0.10s both;
+}
+
+.dorm-log-page .dl-filter-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1e3a8a;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dorm-log-page .dl-filter-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.dorm-log-page .dl-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f8fafc;
+  color: #64748b;
+  border: 1.5px solid #e2e8f0;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Noto Sans Thai', sans-serif;
+  white-space: nowrap;
+}
+
+.dorm-log-page .dl-filter-btn:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #93c5fd;
+  transform: translateY(-1px);
+}
+
+.dorm-log-page .dl-filter-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   RANGE FILTER
+   ============================================================ */
+.dorm-log-page .dl-range-filter {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 0 0 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(135deg, #eff6ff 0%, white 100%);
+  animation: dl-slideDown 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.dorm-log-page .dl-range-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.dorm-log-page .dl-range-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.dorm-log-page .dl-date-input {
+  flex: 1;
+  min-width: 175px;
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e40af;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.dorm-log-page .dl-date-input:hover {
+  border-color: #60a5fa;
+  background: white;
+}
+
+.dorm-log-page .dl-date-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.dorm-log-page .dl-date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(32%) sepia(91%) saturate(1678%) hue-rotate(216deg) brightness(93%) contrast(92%);
+}
+
+.dorm-log-page .dl-range-controls>span {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #64748b;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+/* Range search button */
+.dorm-log-page .dl-range-btn {
+  padding: 10px 22px !important;
+  background: linear-gradient(135deg, #f97316, #ea580c) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.25);
+  white-space: nowrap;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Noto Sans Thai', sans-serif !important;
+}
+
+.dorm-log-page .dl-range-btn::before {
+  content: '🔍';
+  font-size: 14px;
+}
+
+.dorm-log-page .dl-range-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(249, 115, 22, 0.40);
+}
+
+.dorm-log-page .dl-range-btn:disabled {
+  opacity: 0.50;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.dorm-log-page .dl-range-btn.loading {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.dorm-log-page .dl-range-btn.loading::before {
+  content: '⏳';
+}
+
+/* Range result */
+.dorm-log-page .dl-range-result {
+  background: #dcfce7;
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  color: #065f46;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  animation: dl-fadeIn 0.30s ease both;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.20);
+}
+
+.dorm-log-page .dl-range-result b {
+  font-size: 18px;
+  font-weight: 800;
+  color: #16a34a;
+  padding: 1px 9px;
+  background: rgba(34, 197, 94, 0.14);
+  border-radius: 6px;
+  margin: 0 3px;
+}
+
+.dorm-log-page .dl-range-result.empty {
+  background: #fef3c7;
+  border-color: #facc15;
+  color: #92400e;
+  box-shadow: none;
+}
+
+.dorm-log-page .dl-range-result.empty::before {
+  content: '⚠️';
+  font-size: 16px;
+}
+
+.dorm-log-page .dl-range-result.error {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+  box-shadow: none;
+}
+
+/* ============================================================
+   TABLE CONTAINER
+   ============================================================ */
+.dorm-log-page .dl-table-container {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  animation: dl-fadeUp 0.44s ease 0.14s both;
+}
+
+.dorm-log-page .dl-table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dorm-log-page .dl-table-wrapper::-webkit-scrollbar {
+  height: 5px;
+}
+
+.dorm-log-page .dl-table-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.dorm-log-page .dl-table-wrapper::-webkit-scrollbar-thumb {
+  background: #fdba74;
+  border-radius: 99px;
+}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.dorm-log-page .dl-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 700px;
+  font-size: 13.5px;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+/* thead */
+.dorm-log-page .dl-table thead {
+  background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.dorm-log-page .dl-table th {
+  padding: 13px 18px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.dorm-log-page .dl-table th:first-child {
+  border-radius: 12px 0 0 0;
+}
+
+.dorm-log-page .dl-table th:last-child {
+  border-radius: 0 12px 0 0;
+}
+
+/* tbody */
+.dorm-log-page .dl-table tbody tr {
+  transition: background 0.16s;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dorm-log-page .dl-table tbody tr:hover {
+  background: #eff6ff;
+}
+
+.dorm-log-page .dl-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.dorm-log-page .dl-table td {
+  padding: 13px 18px;
+  font-size: 13.5px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+/* Row num */
+.dorm-log-page .dl-row-num {
+  font-weight: 700;
+  color: #94a3b8;
+  font-size: 12.5px;
+  width: 50px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Student code */
+.dorm-log-page .dl-student-code {
+  font-weight: 600;
+}
+
+.dorm-log-page .dl-code-badge {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1e40af;
+  padding: 4px 11px;
+  border-radius: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+  border: 1.5px solid #bfdbfe;
+  letter-spacing: 0.04em;
+}
+
+/* Time cells */
+.dorm-log-page .dl-time-cell {
+  min-width: 185px;
+}
+
+.dorm-log-page .dl-time-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dorm-log-page .dl-time-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.dorm-log-page .dl-time-text {
+  font-size: 13px;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.dorm-log-page .dl-no-data {
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ============================================================
+   STATUS BADGE
+   ============================================================ */
+.dorm-log-page .dl-status-cell {
+  text-align: left;
+  min-width: 130px;
+}
+
+.dorm-log-page .dl-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dorm-log-page .dl-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: dl-badgePulse 2.2s ease-in-out infinite;
+}
+
+/* In — Green */
+.dorm-log-page .dl-status-badge.in {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #065f46;
+  border: 1.5px solid #86efac;
+}
+
+.dorm-log-page .dl-status-badge.in .dl-badge-dot {
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.55);
+}
+
+/* Out — Orange */
+.dorm-log-page .dl-status-badge.out {
+  background: linear-gradient(135deg, #ffedd5, #fed7aa);
+  color: #c2410c;
+  border: 1.5px solid #fdba74;
+}
+
+.dorm-log-page .dl-status-badge.out .dl-badge-dot {
+  background: #f97316;
+  box-shadow: 0 0 6px rgba(249, 115, 22, 0.55);
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.dorm-log-page .dl-empty-state {
+  text-align: center !important;
+  padding: 52px 20px !important;
+}
+
+.dorm-log-page .dl-empty-icon {
+  font-size: 52px;
+  margin-bottom: 12px;
+  opacity: 0.40;
+  display: block;
+}
+
+.dorm-log-page .dl-empty-text {
+  font-size: 14.5px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  .dorm-log-page {
+    background: white;
+  }
+
+  .dorm-log-page .dl-header-actions,
+  .dorm-log-page .dl-filter-section,
+  .dorm-log-page .dl-range-filter {
+    display: none;
+  }
+
+  .dorm-log-page .dl-page-header,
+  .dorm-log-page .dl-table-container {
+    box-shadow: none;
+    background: white;
+  }
+
+  .dorm-log-page .dl-table {
+    page-break-inside: auto;
+  }
+
+  .dorm-log-page .dl-table tr {
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ≥1400px */
+@media (min-width: 1400px) {
+  .dorm-log-page .dl-page-header {
+    padding: 24px 30px;
+  }
+
+  .dorm-log-page .dl-stats-grid {
+    gap: 22px;
+  }
+
+  .dorm-log-page .dl-stat-value {
+    font-size: 34px;
+  }
+}
+
+/* ≤1199px */
+@media (max-width: 1199px) {
+  .dorm-log-page .dl-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .dorm-log-page .dl-table-container {
+    padding: 16px;
+  }
+}
+
+/* ≤1023px */
+@media (max-width: 1023px) {
+  .dorm-log-page .dl-page-header {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    padding: 18px 20px;
+  }
+
+  .dorm-log-page .dl-header-actions {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+  }
+
+  .dorm-log-page .dl-header-actions-row {
+    justify-content: flex-start;
+  }
+
+  .dorm-log-page .dl-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .dorm-log-page .dl-stat-card {
+    padding: 16px;
+    gap: 13px;
+  }
+
+  .dorm-log-page .dl-filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  .dorm-log-page .dl-filter-buttons {
+    width: 100%;
+  }
+}
+
+/* ≤767px */
+@media (max-width: 767px) {
+  .dorm-log-page .dl-page-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 18px 16px;
+  }
+
+  .dorm-log-page .dl-header-icon-box {
+    margin: 0 auto;
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+  }
+
+  .dorm-log-page .dl-header-title {
+    font-size: 18px;
+  }
+
+  .dorm-log-page .dl-header-subtitle {
+    font-size: 12.5px;
+  }
+
+  .dorm-log-page .dl-header-actions {
+    align-items: center;
+  }
+
+  .dorm-log-page .dl-header-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dorm-log-page .dl-btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dorm-log-page .dl-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+  }
+
+  .dorm-log-page .dl-stat-value {
+    font-size: 26px;
+  }
+
+  .dorm-log-page .dl-stat-card {
+    padding: 14px;
+    gap: 11px;
+  }
+
+  .dorm-log-page .dl-stat-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .dorm-log-page .dl-table th,
+  .dorm-log-page .dl-table td {
+    padding: 10px 12px;
+    font-size: 12.5px;
+  }
+
+  .dorm-log-page .dl-time-cell {
+    min-width: 155px;
+  }
+
+  .dorm-log-page .dl-time-text {
+    font-size: 12px;
+  }
+
+  .dorm-log-page .dl-code-badge {
+    font-size: 11.5px;
+    padding: 3px 9px;
+  }
+
+  .dorm-log-page .dl-range-filter {
+    padding: 16px;
+  }
+
+  .dorm-log-page .dl-range-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dorm-log-page .dl-date-input {
+    min-width: 100%;
+  }
+
+  .dorm-log-page .dl-range-controls>span {
+    text-align: center;
+    padding: 4px 0;
+  }
+
+  .dorm-log-page .dl-range-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dorm-log-page .dl-range-result {
+    font-size: 13px;
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
+}
+
+/* ≤479px */
+@media (max-width: 479px) {
+  .dorm-log-page .dl-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dorm-log-page .dl-stat-card {
+    padding: 13px;
+    gap: 11px;
+  }
+
+  .dorm-log-page .dl-stat-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .dorm-log-page .dl-stat-value {
+    font-size: 24px;
+  }
+
+  .dorm-log-page .dl-stat-label {
+    font-size: 12px;
+  }
+
+  .dorm-log-page .dl-filter-section {
+    padding: 13px;
+  }
+
+  .dorm-log-page .dl-filter-btn {
+    font-size: 12.5px;
+    padding: 7px 12px;
+  }
+
+  .dorm-log-page .dl-table-container {
+    padding: 11px;
+  }
+
+  .dorm-log-page .dl-table {
+    min-width: 580px;
+  }
+
+  .dorm-log-page .dl-table th,
+  .dorm-log-page .dl-table td {
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+
+  .dorm-log-page .dl-row-num {
+    display: none;
+  }
+
+  .dorm-log-page .dl-range-filter {
+    padding: 14px;
+  }
+
+  .dorm-log-page .dl-range-title {
+    font-size: 13.5px;
+  }
+
+  .dorm-log-page .dl-range-btn {
+    padding: 9px 16px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ≤359px */
+@media (max-width: 359px) {
+  .dorm-log-page .dl-page-header {
+    padding: 14px;
+  }
+
+  .dorm-log-page .dl-header-title {
+    font-size: 16px;
+  }
+
+  .dorm-log-page .dl-stat-value {
+    font-size: 22px;
+  }
+
+  .dorm-log-page .dl-stat-card {
+    padding: 11px;
+    gap: 9px;
+  }
+
+  .dorm-log-page .dl-stat-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .dorm-log-page .dl-filter-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .dorm-log-page .dl-table-container {
+    padding: 9px;
+  }
+}
